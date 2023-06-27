@@ -366,9 +366,12 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
   @override
   void dispose() {
     primary.itemPositionsNotifier.itemPositions
-        .removeListener(_updatePositions);
+        ..removeListener(_updatePositions)
+        ..dispose();
     secondary.itemPositionsNotifier.itemPositions
-        .removeListener(_updatePositions);
+        ..removeListener(_updatePositions)
+        ..dispose();
+    widget.itemPositionsNotifier?.itemPositions.dispose();
     _animationController?.dispose();
     super.dispose();
   }
